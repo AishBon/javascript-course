@@ -140,36 +140,108 @@
 
 //Operator precedence
 
-const now = 2037;
-const ageJonas = now - 1991;
-const ageSarah = now - 2018;
+// const now = 2037;
+// const ageJonas = now - 1991;
+// const ageSarah = now - 2018;
 
-console.log(now - 1991 > now - 2018);
+// console.log(now - 1991 > now - 2018);
 
-let x, y;
-x = y = 25 - 10 - 5;
-console.log(x, y);
+// let x, y;
+// x = y = 25 - 10 - 5;
+// console.log(x, y);
 
-const averageAge = (ageJonas + ageSarah) / 2
-console.log(ageJonas, ageSarah, averageAge);
+// const averageAge = (ageJonas + ageSarah) / 2
+// console.log(ageJonas, ageSarah, averageAge);
 
-///////////////
+// ///////////////
+
+// const massMark = 78;
+// const heightMark = 1.69;
+// const massJohn = 92;
+// const heightJohn = 1.95;
+
+// const bmiMark = massMark / heightMark ** 2;
+
+// const bmiJohn = massJohn / heightJohn ** 2;
+
+// console.log("Mark BMI:", + bmiMark);
+// console.log("John BMI:", + bmiJohn);
+
+// console.log("Does Mark have a higher BMI than John:", + bmiMark > bmiJohn);
+
+// Strings and Template literals
+
+const firstName = "Jonas";
+const job = "teacher";
+const birthYear = 1991;
+const year = 2037;
+
+const jonas =
+  "I'm " + firstName + ", a " + (year - birthYear) + " year old " + job + "!";
+console.log(jonas);
+
+const jonasNew = `I'm ${firstName}, a ${year - birthYear} year old ${job}!`;
+console.log(jonasNew);
+
+console.log(`I'm $ {2037 - 1991} years old`);
+console.log(`Math works: ${2 + 3} equals five`);
+console.log(`Comparisons too: ${5 > 3}`); // true
+
+console.log(`this is a regular string`);
+
+///////////
+
+//Taking decisions: if /else statements
+
+const age = 10;
+
+if (age >= 18) {
+  console.log("Sarah can start driving license 🚗");
+} else {
+  const yearsLeft = 18 - age;
+  console.log(`Sarah is too young. Wait another ${yearsLeft} years :)`);
+}
+
+//////////////
+
+//Truthy and Falsey values
+console.log(Boolean(0)); // false
+console.log(Boolean (undefined));
+console.log(Boolean("Jonas"));
+
+
+const money = 0;
+
+if (money) {
+    console.log(`Don't spend it all`);
+} else {
+    console.log("You should get a job!");
+}
+
+let height = 0;
+if (height) {
+  console.log("YAY! Height is defined");
+} else {
+  console.log("Height is UNDEFINED"); 
+}
+
+if (height !== undefined) {
+  console.log("Height is defined");
+}
 
 const massMark = 78;
 const heightMark = 1.69;
 const massJohn = 92;
 const heightJohn = 1.95;
 
-const bmiMark = massMark / heightMark ** 2;
+const BMIMark = massMark / heightMark ** 2;
+const BMIJohn = massJohn / (heightJohn * heightJohn);
+console.log(BMIMark, BMIJohn);
+const markHigherBMI = BMIMark > BMIJohn;
 
-const bmiJohn = massJohn / heightJohn ** 2;
-
-console.log("Mark BMI:", + bmiMark);
-console.log("John BMI:", + bmiJohn);
-
-console.log("Does Mark have a higher BMI than John:", + bmiMark > bmiJohn);
-
-
-
-
+if (markHigherBMI) {
+  console.log(`Mark's BMI is higher than John's by a ${BMIMark - BMIJohn} margin`);
+} else {
+  console.log(`John's BMI is higher than Mark's by a ${BMIJohn - BMIMark} margin`);
+}
 
