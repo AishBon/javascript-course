@@ -449,44 +449,376 @@
 //   bonus = true;
 // } else if (score >= 80) {
 //   console.log("Good job!");
-//   grade = "B";
+// //   grade = "B";
+// // }
+
+// // 1. Login status
+// const isLoggedIn = true;
+// let welcomeMessage = isLoggedIn ? "Welcome back!" : "Please sign in";
+
+// // 2. Price with discount
+// const isPremium = false;
+// let price = isPremium ? 100 * 0.8 : 100;
+
+// // Create smart responses using ternary in template literals:
+// const score = 85;
+// const weather = "sunny";
+// const battery = 15;
+
+// console.log(`Your score: ${score} (${score >= 75 ? "Passed" : "Failed"})`);
+// console.log(`Weather is ${weather} (${weather === "sunny" ? "Get some tan!" : "Stay inside"})`);
+// console.log(`Battery: ${battery}% (${battery < 20 ? "Please Charge" : "Safe"})`);
+
+// const bills = [275, 40, 430];
+
+// for (const bill of bills) {
+//   const tip = bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
+//   console.log(`The bill was ${bill}, the tip was ${tip}, and the total value ${bill + tip}`);
 // }
 
-// 1. Login status
-const isLoggedIn = true;
-let welcomeMessage = isLoggedIn ? "Welcome back!" : "Please sign in";
+// ////////////////////////////////////
+// // Coding Challenge #4
 
-// 2. Price with discount
-const isPremium = false;
-let price = isPremium ? 100 * 0.8 : 100;
+// // Coding Challenge #4
 
-// Create smart responses using ternary in template literals:
-const score = 85;
-const weather = "sunny";
-const battery = 15;
+// //const bill = 275;
+// //const bill = 40;
+// const bill = 430;
 
-console.log(`Your score: ${score} (${score >= 75 ? "Passed" : "Failed"})`);
-console.log(`Weather is ${weather} (${weather === "sunny" ? "Get some tan!" : "Stay inside"})`);
-console.log(`Battery: ${battery}% (${battery < 20 ? "Please Charge" : "Safe"})`);
+// // Step 1: Create the tip calculation using ternary operator
+// const tip = bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
 
-const bills = [275, 40, 430];
-
-for (const bill of bills) {
-  const tip = bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
-  console.log(`The bill was ${bill}, the tip was ${tip}, and the total value ${bill + tip}`);
-}
+// // Step 2: Create beautiful output with template literal
+// console.log(`The bill was ${bill}, the tip was ${tip}, and the total value ${bill + tip}`);
 
 ////////////////////////////////////
-// Coding Challenge #4
+// The Array Problem
+// const jonasArray = [
+//   "Jonas",
+//   "Schmedtmann",
+//   2037 - 1991,
+//   "teacher",
+//   ["Michael", "Peter", "Steven"],
+// ];
 
-// Coding Challenge #4
+// // console.log(jonasArray[0]); 
+// // console.log(jonasArray[1]); 
+// // console.log(jonasArray[2]); 
 
-//const bill = 275;
-//const bill = 40;
-const bill = 430;
+// ////////////////////////////////////
+// // Objects - Creation with Object Literal Syntax
+// console.log("=== OBJECTS ===");
 
-// Step 1: Create the tip calculation using ternary operator
-const tip = bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
+// const jonas = {
+//   firstName: "Jonas", 
+//   lastName: "Schmedtmann",
+//   age: 2037 - 1991,
+//   job: "teacher", 
+//   friends: ["Michael", "Peter", "Steven"],
+// };
+// console.log(jonas);
 
-// Step 2: Create beautiful output with template literal
-console.log(`The bill was ${bill}, the tip was ${tip}, and the total value ${bill + tip}`);
+// const jonasArray = [
+//   "Jonas",
+//   "Schmedtmann",
+//   46,
+//   "teacher",
+// //   ["Michael", "Peter", "Steven"],
+// // ];
+
+// // const jonasObject = {
+// //   firstName: "Jonas",
+// //   lastName: "Schmedtmann",
+// //   age: 46,
+// //   job: "teacher",
+// //   friends: ["Michael", "Peter", "Steven"],
+// // };
+
+// // // Dot notation - clean and readable
+// // console.log(jonas.firstName); 
+// // console.log(jonas.lastName); 
+// // console.log(jonas.age); 
+// // console.log(jonas.job);
+// // console.log(jonas.friends);
+
+// // // Bracket notation - uses strings
+// // console.log(jonas["firstName"]);
+// // console.log(jonas["lastName"]);
+// // console.log(jonas["age"]);
+
+// // // Bracket notation with expressions - compute property names!
+// // const nameKey = "Name";
+// // console.log(jonas["first" + nameKey]);
+// // console.log(jonas["last" + nameKey]);
+
+// // // Both notations work for modification
+// // jonas.job = "programmer";
+// // jonas["age"] = 35;
+// // console.log(jonas);
+
+// // // Objects can grow - add properties after creation
+// // jonas.location = "Portugal";
+// // jonas["twitter"] = "@jonasschmedtman";
+// // jonas.hasDriversLicense = true;
+// // console.log(jonas);
+
+// // // Objects - Creation with Object Literal Syntax
+// // console.log("=== MY OBJECTS ===");
+
+// // // 1. Create a 'book' object
+// // const book = {
+// //   title: "Miss Peregrine's Home for Peculiar Children",
+// //   author: "Ransom Riggs",
+// //   pages: 352,
+// //   isRead: false,
+// // };
+// // console.log(book);
+
+// // // 2. Create a 'playlist' object
+// // const playlist = {
+// //   name: "Mellow bar",
+// //   creator: "Aisha",
+// //   songs: ["Fabric of Reality", "Potential for Love", "Mind-Altering Substance", "Ecstasy"],
+// //   genre: "Bedroom R&B",
+// // };
+// // console.log(playlist);
+
+// // // 3. Access and log different properties using both dot and bracket notation
+// // console.log(book.title); 
+// // console.log(book.author); 
+// // console.log(book.pages);
+// // console.log(book.isRead);
+
+// // console.log(playlist["name"]);
+// // console.log(playlist["creator"]);
+// // console.log(playlist["songs"]);
+// // console.log(playlist["genre"]);
+
+// // // 4. Add a new property to each object
+// // book.yearPublished = 2011;
+// // playlist["likes"] = 103;
+
+// // console.log(book);
+// // console.log(playlist);
+
+// // // 5. Modify an existing property in each object
+// // book.isRead = true;
+// // playlist.genre = "Chill R&B";
+
+// // console.log(book);
+// // console.log(playlist);
+
+// // Ordered, indexed data - think lists
+// const listOfYears = [1991, 1984, 2008, 2020];
+// const shoppingList = ["apples", "bananas", "milk", "bread"];
+// const testScores = [85, 92, 78, 96];
+
+// // Named, descriptive data - think entities
+// const person = {
+//   name: "Jonas",
+//   age: 46,
+//   occupation: "teacher",
+// };
+
+// const car = {
+//   brand: "Toyota",
+//   model: "Camry",
+//   year: 2020,
+//   color: "blue",
+// };
+
+// // Objects can contain arrays, arrays can contain objects
+// const student = {
+//   name: "Sarah",
+//   grades: [85, 92, 78],
+//   address: {
+
+//     street: "123 Main St",
+//     city: "New York",
+//   },
+// };
+
+// console.log(student.grades[0]);
+// console.log(student.address.city);
+
+// ////////////////////////////////////
+// // Object Methods
+
+// const jonas = {
+//   firstName: "Jonas",
+//   lastName: "Schmedtmann",
+//   birthYear: 1991,
+//   job: "teacher",
+//   friends: ["Michael", "Peter", "Steven"],
+//   hasDriversLicense: true,
+
+//   // Method - function inside object
+//   calcAge: function (birthYear) {
+//     return 2037 - birthYear;
+//   },
+// };
+
+// // Call methods using dot notation
+// console.log(jonas.calcAge(1991));
+// console.log(jonas.calcAge(jonas.birthYear));
+
+// const jonasImproved = {
+//   firstName: "Jonas",
+//   lastName: "Schmedtmann",
+// //   birthYear: 1991,
+// //   job: "teacher",
+// //   friends: ["Michael", "Peter", "Steven"],
+// //   hasDriversLicense: true,
+
+// //   calcAge: function () {
+// //     console.log(this);
+// //     return 2037 - this.birthYear;
+// //   },
+// // };
+
+// // console.log(jonasImproved.calcAge());
+
+// // const jonasAdvanced = {
+// //   firstName: "Jonas",
+// //   lastName: "Schmedtmann",
+// //   birthYear: 1991,
+// //   job: "teacher",
+// //   friends: ["Michael", "Peter", "Steven"],
+// //   hasDriversLicense: true,
+
+// //   calcAge: function () {
+// //     this.age = 2037 - this.birthYear; // Store result as new property
+// //     return this.age;
+// //   },
+
+// //   getSummary: function () {
+// //     return `${this.firstName} is a ${this.calcAge()}-year old ${
+// //       this.job
+// //     }, and he has ${this.hasDriversLicense ? "a" : "no"} driver's license.`;
+// //   },
+// // };
+
+// // console.log(jonasAdvanced.calcAge());
+// // console.log(jonasAdvanced.age);
+// // console.log(jonasAdvanced.getSummary());
+
+// // Create a 'calculator' object
+// const calculator = {
+//   num1: 10,
+//   num2: 5,
+//   operator: "+",
+
+//   // Methods
+//   add: function () {
+//     return this.num1 + this.num2;
+//   },
+
+//   subtract: function () {
+//     return this.num1 - this.num2;
+//   },
+
+//   multiply: function () {
+//     return this.num1 * this.num2;
+//   },
+
+//   divide: function () {
+//     return this.num1 / this.num2;
+//   },
+
+//   // Decide which operation to perform
+//   calculate: function () {
+//     if (this.operator === "+") return this.add();
+//     if (this.operator === "-") return this.subtract();
+//     if (this.operator === "*") return this.multiply();
+//     if (this.operator === "/") return this.divide();
+//     return "Invalid operator";
+//   },
+
+//   // Summary method
+//   getResult: function () {
+//     return `${this.num1} ${this.operator} ${this.num2} = ${this.calculate()}`;
+//   },
+// };
+
+// // Test your calculator
+// console.log(calculator.calculate()); // Performs calculation
+// console.log(calculator.getResult()); // Returns formatted string
+
+// // Change operator and test again
+// calculator.operator = "*";
+// console.log(calculator.calculate());
+// console.log(calculator.getResult());
+
+// User Profile System
+const user = {
+  firstName: "Sarah",
+  lastName: "Johnson",
+  birthYear: 1995,
+  location: "New York",
+  interests: ["photography", "travel", "coding"],
+
+  friends: [
+    { name: "Michael", status: "active" },
+    { name: "Emma", status: "inactive" },
+    { name: "David", status: "active" },
+  ],
+
+  isActive: true,
+
+  // 1. calcAge()
+  calcAge: function () {
+    this.age = 2025 - this.birthYear; 
+    return this.age;
+  },
+
+  // 2. addFriend(name, status)
+  addFriend: function (name, status) {
+    this.friends.push({ name: name, status: status });
+  },
+
+  // 3. getActiveFriends()
+  getActiveFriends: function () {
+    let count = 0;
+    for (let friend of this.friends) {
+      if (friend.status === "active") count++;
+    }
+    return count;
+  },
+
+  // 4. getSummary()
+  getSummary: function () {
+    return `${this.firstName} ${this.lastName} is a ${this.calcAge()}-year-old from ${
+      this.location
+    }. Interests include ${this.interests.join(", ")}. 
+Currently ${this.isActive ? "active" : "inactive"} on the platform, 
+and has ${this.getActiveFriends()} active friends out of ${
+      this.friends.length
+    } total.`;
+  },
+
+  // 5. toggleStatus()
+  toggleStatus: function () {
+    this.isActive = !this.isActive;
+    return this.isActive;
+  },
+};
+
+// ==== Testing the user profile system ====
+console.log(user.calcAge()); 
+console.log(user.getActiveFriends());
+console.log(user.getSummary());       
+
+// Add a new friend
+user.addFriend("Sophia", "active");
+console.log(user.getSummary());
+
+// Toggle user’s status
+user.toggleStatus();
+console.log(user.getSummary());
+
+console.log(user.getSummary());
+user.addFriend("Alex", "active");
+user.toggleStatus();
+console.log(`\nAfter updates:`);
+console.log(user.getSummary());
+
