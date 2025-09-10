@@ -1,135 +1,118 @@
-// 'use strict';
+'use strict';
 
-// console.log('Game setup ready');
+// Ranges and default
+const MIN_NUMBER = 1;
+const MAX_NUMBER = 20;
+const START_SCORE = 20;
 
-// // ===== DOM Element Selection =====
-// console.log(`=== DOM Element Selection ===`);
+// cached selectors (single source of truth)
+const messageEl = document.querySelector('.message');
+const scoreEl = document.querySelector(`.score`);
+const numberEl = document.querySelector(`.number`);
+const highscoreEl = document.querySelector(`.highscore`);
+const guessEl = document.querySelector(`.guess`);
+const checkBtn = document.querySelector(`.check`);
+const againBtn = document.querySelector(`.again`);
 
-// const messageEl = document.querySelector('.message');
-// console.log(messageEl);
+// UI helpers
+function setMessage(text) {
+  messageEl.textContent = text;
+}
+function setNumber(number) {
+  numberEl.textContent = number;
+}
+function setScore(score) {
+  scoreEl.textContent = score;
+}
+function setHighscore(highscore) {
+  highscoreEl.textContent = highscore;
+}
+function setBackground(color) {
+  document.body.style.backgroundColor = color;
+}
+function disablePlay(disabled) {
+  guessEl.disabled = disabled;
+  checkBtn.disabled = disabled;
+}
+function clearInput() {
+  guessEl.value = '';
+}
 
-// console.log(messageEl.textContent);
+// Game State & Reset
 
-// messageEl.textContent = 'Hello from javascript!!!';
-
-// // Access score class name
-
-// const scoreEl = document.querySelector(`.score`);
-
-// console.log(`Score Element:`, scoreEl);
-
-// const numberEl = document.querySelector(`.number`);
-// numberEl.textContent = 15;
-
-// const highscoreEl = document.querySelector(`.highscore`);
-
-// console.log(`Current Highscore:`, highscoreEl.textContent);
-
-// const guessEl = document.querySelector(`.guess`);
-
-// guessEl.value = 10;
-
-// console.log(`Guess Input Value:`, guessEl.value);
-
-// Game State Variables
-
-let secretNumber = Math.trunc(Math.random() * 20) + 1;
-
-// Debugging
-console.log(`Secret Number:`, secretNumber);
-
-let score = 20;
+let secretNumber = Math.trunc(Math.random() * MAX_NUMBER) + MIN_NUMBER;
+let score = START_SCORE;
 let highscore = 0;
 
-document.querySelector(`.score`).textContent = score;
-document.querySelector(`.highscore`).textContent = highscore;
+function resetGameState() {
+  score = START_SCORE;
+  secretNumber = Math.trunc(Math.random() * MAX_NUMBER) + MIN_NUMBER;
+}
 
-console.log(`Game State Initialized`);
+function renderInitialUI() {
+  setMessage('Start guessing...');
+  setNumber('?');
+  setScore(score);
+  clearInput();
+  disablePlay(false);
+  setBackground('');
+}
 
-// playerName attempts, gameActive
-// and display to console
+// Initial render
+renderInitialUI();
 
-let playerName = 'Aisha';
-let attempts = 0;
-let gameActive = true;
-
-console.log(`Player:`, playerName);
-console.log(`Attempts:`, attempts);
-console.log(`Game Active:`, gameActive);
-
-// Basic Game Logic
-document.querySelector(`.check`).addEventListener(`click`, function () {
-  //code here
-  console.log(`Check button clicked!!!`);
-  const guess = Number(document.querySelector(`.guess`).value);
-  console.log(`Player Guess:`, guess);
+// handlers
+checkBtn.addEventListener(`click`, function () {
+  const guess = Number(guessEl.value);
 
   // if you did not input any number, show no number
-  if (!guess) {
-    document.querySelector(`.message`).textContent = 'No number!';
-    return;
-  }
-
-  if (!guess) {
-    document.querySelector(
-      `.message`
-    ).textContent = `Number must be between 1 and 20!`;
-    return;
-  }
+  if (!guess) return setMessage('No number!');
+  if (guess < MIN_NUMBER || guess > MAX_NUMBER)
+    return setMessage(
+      `Number must be between ${MIN_NUMBER} and ${MAX_NUMBER}!`
+    );
 
   if (guess === secretNumber) {
-    console.log(`Correct Guess!`);
-    document.querySelector(`.message`).textContent = 'Correct Number!';
-    document.querySelector(`.number`).textContent = secretNumber;
-    document.body.style.backgroundColor = `green`;
+    setMessage('🎉 Correct Number!');
+    setNumber(secretNumber);
+    setBackground('green');
     if (score > highscore) {
       highscore = score;
-      document.querySelector(`.highscore`).textContent = highscore;
-      document.querySelector(`.message`).textContent =
-        'You are a winner, baby!!!';
-      document.querySelector(`.guess`).disabled = true;
-      document.querySelector(`.check`).disabled = true;
+      setHighscore(highscore);
     }
-  } else if (guess > secretNumber) {
-    console.log(`Too High!`);
-    document.querySelector(`.message`).textContent = 'Too High!';
-    score--;
-    document.querySelector(`.score`).textContent = score;
-    if (score < 1) {
-      document.querySelector(`.message`).textContent = 'You lose!!!';
-      document.querySelector(`.number`).textContent = secretNumber;
-      document.querySelector(`.guess`).disabled = true;
-      document.querySelector(`.check`).disabled = true;
-      document.body.style.backgroundColor = `red`;
-    }
-  } else if (guess < secretNumber) {
-    console.log(`Too Low!`);
-    document.querySelector(`.message`).textContent = 'Too Low!';
-    score--;
-    document.querySelector(`.score`).textContent = score;
-    if (score < 1) {
-      document.querySelector(`.message`).textContent = 'You lose!!!';
-      document.querySelector(`.number`).textContent = secretNumber;
-      document.querySelector(`.guess`).disabled = true;
-      document.querySelector(`.check`).disabled = true;
-      document.body.style.backgroundColor = `red`;
-    }
+    disablePlay(true);
+    clearInput();
+    return; // early exit
+  }
+
+  // Wrong guess
+  setMessage(guess > secretNumber ? '📈 Too high!' : '📉 Too low!');
+  score--;
+  setScore(score);
+
+  if (score < 1) {
+    setMessage('💥 You lost!');
+    setNumber(secretNumber);
+    setBackground('red');
+    disablePlay(true);
+    clearInput();
   }
 });
 
-const guess = Number(document.querySelector(`.guess`).value);
-console.log(`Player Guess:`, guess);
+againBtn.addEventListener('click', function () {
+  resetGameState();
+  renderInitialUI();
+  console.log(`New Secret Number`, secretNumber);
+});
 
-document.querySelector(`.again`).addEventListener(`click`, function () {
-  console.log(`Again button is working!!!`);
-  score = 20;
-  secretNumber = Math.trunc(Math.random() * 20) + 1;
-  console.log(`Your New Secret Number:`, secretNumber);
-  document.querySelector(`.message`).textContent = 'Start guessing...';
-  document.querySelector(`.number`).textContent = '?';
-  document.querySelector(`.score`).textContent = score;
-  document.querySelector(`.guess`).value = '';
-  document.querySelector(`.guess`).disabled = false;
-  document.querySelector(`.check`).disabled = false;
-  document.body.style.backgroundColor = '';
+// Enter key submits when possible
+window.addEventListener('keydown', function (e) {
+  if (e.key === 'Enter' && !checkBtn.disabled) {
+    checkBtn.click();
+  }
+});
+
+// Focus input on restart
+againBtn.addEventListener('click', function () {
+  guessInputEl.focus();
 });
