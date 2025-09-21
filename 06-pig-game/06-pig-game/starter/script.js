@@ -13,20 +13,35 @@ const current1El = document.getElementById('current--1');
 const diceEl = document.querySelector('.dice');
 const btnRoll = document.querySelector('.btn--roll');
 
-// Initialize game
+// Enhanced init function for complete game reset
 const init = function () {
+  // Reset game state
   scores = [0, 0];
   currentScore = 0;
   activePlayer = 0;
   playing = true;
 
+  // Reset all displays
   score0El.textContent = 0;
   score1El.textContent = 0;
   current0El.textContent = 0;
   current1El.textContent = 0;
+
+  // Hide dice
   diceEl.classList.add('hidden');
+
+  // Reset player styling
+  player0El.classList.remove('player--winner');
+  player1El.classList.remove('player--winner');
+  player0El.classList.add('player--active');
+  player1El.classList.remove('player--active');
 };
-init();
+
+// Select the new game button
+const btnNew = document.querySelector('.btn--new');
+
+// New game functionality
+btnNew.addEventListener('click', init);
 
 // Updated roll dice functionality
 btnRoll.addEventListener('click', function () {
@@ -65,7 +80,7 @@ const switchPlayer = function () {
 // Select the hold button
 const btnHold = document.querySelector('.btn--hold');
 
-// Enhanced hold functionality with proper validation
+// Enhanced hold functionality with win condition and validation
 btnHold.addEventListener('click', function () {
   if (playing && currentScore > 0) {
     // Add current score to active player's score
@@ -73,8 +88,25 @@ btnHold.addEventListener('click', function () {
     document.getElementById(`score--${activePlayer}`).textContent =
       scores[activePlayer];
 
-    // Switch to next player
-    switchPlayer();
+    // Check for win condition
+    if (scores[activePlayer] >= 100) {
+      // Player wins!
+      playing = false;
+      diceEl.classList.add('hidden');
+
+      // Add winner styling
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.add('player--winner');
+
+      // Remove active class from winner
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.remove('player--active');
+    } else {
+      // Switch to next player
+      switchPlayer();
+    }
   }
 });
 
@@ -87,3 +119,6 @@ console.log(
   'Player 1 has active class:',
   player1El.classList.contains('player--active')
 );
+
+// ✅ Call init on page load
+init();
