@@ -422,7 +422,7 @@ feat(behind-the-scenes): complete Hour 1 with scoping and hoisting examples
 - Show hoisting behavior for var, let, const, and function types
 - Include TDZ examples and error handling
 - Add comprehensive verification tests for all concepts
-- Master JavaScript's behind-the-scenes execution behavior
+- Master JavaScript's behind-the-scene s execution behavior
 ```
 
 **What this means:**

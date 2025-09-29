@@ -50,18 +50,91 @@
 // console.log(original.hobbies);
 // console.log(shallowCopy.hobbies);
 
-const deepOriginal = {
-  name: 'Aisha',
-  age: 22,
-  address: { city: 'Tokyo', country: 'Japan' },
-  hobbies: ['volleyball', 'eating'],
+// const deepOriginal = {
+//   name: 'Aisha',
+//   age: 22,
+//   address: { city: 'Tokyo', country: 'Japan' },
+//   hobbies: ['volleyball', 'eating'],
+// };
+
+// const deepCopy = structuredClone(deepOriginal);
+
+// deepCopy.address.city = 'Kyoto';
+// deepCopy.hobbies.push('basketball');
+// deepCopy.name = 'Enzo';
+
+// console.log(deepOriginal);
+// console.log(deepCopy);
+
+// const person = {
+//   name: 'Jonas',
+//   greet: function () {
+//     console.log(`Hello I am ${this.name}`);
+//   },
+// };
+
+// person.greet();
+
+// const anotherPerson = { name: 'Sarah' };
+// anotherPerson.greet = person.greet;
+// anotherPerson.greet();
+
+// const greetFuction = person.greet;
+// greetFuction();
+
+// const obj = {
+//   name: 'Objects',
+//   regularMethod: function () {
+//     console.log('Regular: ', this.name);
+//   },
+//   arrowMethod: () => {
+//     console.log('Arrow: ', this.name);
+//   },
+// };
+
+// quiz.regularMethod();
+// quiz.arrowMethod();
+
+// const timer = {
+//   name: 'Timer',
+//   start: function () {
+//     console.log(`${this.name} starting...`);
+
+//     const self = this;
+
+//     setTimeout(function () {
+//       console.log(`${self.name} finished.`);
+//     }, 1000);
+//   },
+//   startModern: function () {
+//     console.log(`${this.name} starting modern...`);
+
+//     setTimeout(() => {
+//       console.log(`${this.name} finished modern.`);
+//     }, 1500);
+//   },
+// };
+
+// timer.start();
+// timer.startModern();
+
+const functionTypes = {
+  regularFunction: function () {
+    console.log('Arguments length:', arguments.length);
+    console.log('First argument:', arguments[0]);
+  },
+
+  arrowFunction: () => {
+    console.log(arguments);
+    console.log('Arrow function called');
+  },
+
+  modernFunction: (...args) => {
+    console.log('Args length:', args.length);
+    console.log('First arg:', args[0]);
+  },
 };
 
-const deepCopy = structuredClone(deepOriginal);
-
-deepCopy.address.city = 'Kyoto';
-deepCopy.hobbies.push('basketball');
-deepCopy.name = 'Enzo';
-
-console.log(deepOriginal);
-console.log(deepCopy);
+functionTypes.regularFunction('hello', 'world');
+//functionTypes.arrowFunction('test');
+functionTypes.modernFunction('modern', 'approach');
