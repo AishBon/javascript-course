@@ -6,9 +6,9 @@ class Workout {
   clicks = 0;
 
   constructor(coords, distance, duration) {
-    this.coords = coords;
-    this.distance = distance;
-    this.duration = duration;
+    this.coords = coords; // lat and long
+    this.distance = distance; // km
+    this.duration = duration; // min
   }
 
   _setDescription() {
@@ -26,19 +26,19 @@ class Workout {
       'November',
       'December',
     ];
-    this.Description = `${this.type[0].toUpperCase()}${this.type.slice(1)} on ${
+
+    // Generate a description using the workout type and current date
+    this.description = `${this.type[0].toUpperCase()}${this.type.slice(1)} on ${
       months[this.date.getMonth()]
     } ${this.date.getDate()}`;
   }
 
   click() {
-    this.click++;
+    this.clicks++;
   }
 }
 
-const testWorkout = new Workout([40.7128, -74.006], 5.2, 24);
-console.log('Test workout:', testWorkout);
-
+// === Running ===
 class Running extends Workout {
   type = 'running';
 
@@ -50,55 +50,108 @@ class Running extends Workout {
   }
 
   calcPace() {
-    this.pace = this.duration / this.distance;
+    this.pace = this.duration / this.distance; // min/km
     return this.pace;
   }
 }
 
+// === Cycling ===
 class Cycling extends Workout {
-  type = 'cycing';
+  type = 'cycling';
 
   constructor(coords, distance, duration, elevationGain) {
     super(coords, distance, duration);
     this.elevationGain = elevationGain;
-
     this.calcSpeed();
     this._setDescription();
   }
 
   calcSpeed() {
-    this.speed = this.distance / (this.duration / 60);
+    this.speed = this.distance / (this.duration / 60); // km/h
     return this.speed;
   }
 }
 
-// Say: "Add comprehensive testing for both workout types" (20 seconds)
-// ===== TESTING THE CLASS HIERARCHY =====
-
-// Say: "Create a running workout with realistic data" (30 seconds)
+// === Running workout test ===
 const run1 = new Running([39.7392, -104.9903], 5.2, 24, 178);
-console.log('=== RUNNING WORKOUT ===');
-console.log('Distance:', run1.distance, 'km');
-console.log('Duration:', run1.duration, 'min');
-console.log('Cadence:', run1.cadence, 'spm');
-console.log('Pace:', run1.pace.toFixed(1), 'min/km');
-console.log('Description:', run1.description);
-console.log('ID:', run1.id);
 
-// Say: "Create a cycling workout with different parameters" (30 seconds)
+console.log('=== Running Workout ===');
+console.log('distance:', run1.distance, 'km');
+console.log('duration:', run1.duration, 'min');
+console.log('cadence:', run1.cadence, 'steps/min');
+console.log('pace:', run1.pace.toFixed(1), 'min/km');
+console.log('description:', run1.description);
+console.log('id:', run1.id);
+
+// === Cycling workout test ===
 const cycling1 = new Cycling([39.7392, -104.9903], 27, 95, 523);
-console.log('=== CYCLING WORKOUT ===');
-console.log('Distance:', cycling1.distance, 'km');
-console.log('Duration:', cycling1.duration, 'min');
-console.log('Elevation Gain:', cycling1.elevationGain, 'm');
-console.log('Speed:', cycling1.speed.toFixed(1), 'km/h');
-console.log('Description:', cycling1.description);
-console.log('ID:', cycling1.id);
 
-// Say: "Test inheritance relationships" (25 seconds)
-console.log('=== INHERITANCE TESTING ===');
-console.log(
-  'Both inherit from Workout:',
-  run1 instanceof Workout,
-  cycling1 instanceof Workout
-);
+console.log('=== Cycling Workout ===');
+console.log('distance:', cycling1.distance, 'km');
+console.log('duration:', cycling1.duration, 'min');
+console.log('elevation gain:', cycling1.elevationGain, 'm');
+console.log('speed:', cycling1.speed.toFixed(1), 'km/h');
+console.log('description:', cycling1.description);
+console.log('id:', cycling1.id);
+
+// === Inheritance test ===
+run1.click();
+cycling1.click();
+
+console.log('=== Inheritance Test ===');
+console.log('Run clicks:', run1.clicks);
+console.log('Cycling clicks:', cycling1.clicks);
+
+// Enhanced App class with better click handling
+class App {
+  #map;
+  #mapZoomLevel = 13;
+  #mapEvent;
+  #workouts = [];
+
+  constructor() {
+    this._getPosition();
+  }
+
+  _getPosition() {
+    if (navigator.geolocation)
+      navigator.geolocation.getCurrentPosition(
+        this._loadMap.bind(this),
+        function () {
+          alert('Could not get your position');
+        }
+      );
+  }
+
+  _loadMap(position) {
+    const { latitude } = position.coords;
+    const { longitude } = position.coords;
+    const coords = [latitude, longitude];
+
+    this.#map = L.map('map').setView(coords, this.#mapZoomLevel);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(this.#map);
+
+    // Add click event listener
+    this.#map.on('click', this._showForm.bind(this));
+  }
+
+  _showForm(mapE) {
+    this.#mapEvent = mapE;
+    const { lat, lng } = mapE.latlng;
+
+    console.log(`Map clicked at: ${lat.toFixed(4)}, ${lng.toFixed(4)}`);
+
+    // Add a temporary marker to show where user clicked
+    L.marker([lat, lng])
+      .addTo(this.#map)
+      .bindPopup(`Clicked here: ${lat.toFixed(4)}, ${lng.toFixed(4)}`)
+      .openPopup();
+  }
+}
+
+// Create the app
+const app = new App();
